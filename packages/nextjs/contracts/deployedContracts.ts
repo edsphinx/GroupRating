@@ -422,7 +422,7 @@ const deployedContracts = {
   },
   534351: {
     GroupRating: {
-      address: "0xE5BD5bDC03371fB239956dbbF40bD185D6c2ea28",
+      address: "0xb9e847f664227f883bcE636268D286D38803ec15",
       abi: [
         {
           inputs: [
