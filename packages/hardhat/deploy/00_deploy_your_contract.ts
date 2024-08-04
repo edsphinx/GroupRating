@@ -8,7 +8,7 @@ import { Contract } from "ethers";
  *
  * @param hre HardhatRuntimeEnvironment object.
  */
-const deployYourContract: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
+const deployGroupRating: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   /*
     On localhost, the deployer account is the one that comes with Hardhat, which is already funded.
 
@@ -22,10 +22,10 @@ const deployYourContract: DeployFunction = async function (hre: HardhatRuntimeEn
   const { deployer } = await hre.getNamedAccounts();
   const { deploy } = hre.deployments;
 
-  await deploy("YourContract", {
+  await deploy("GroupRating", {
     from: deployer,
     // Contract constructor arguments
-    args: [deployer],
+    args: [deployer, "0x53a2b8d5fcfee24fa5e92ce4dfebbea22ad32dfa1d4d6945c59a9365228646fd"],
     log: true,
     // autoMine: can be passed to the deploy function to make the deployment process faster on local networks by
     // automatically mining the contract deployment transaction. There is no effect on live networks.
@@ -33,12 +33,18 @@ const deployYourContract: DeployFunction = async function (hre: HardhatRuntimeEn
   });
 
   // Get the deployed contract to interact with it after deploying.
-  const yourContract = await hre.ethers.getContract<Contract>("YourContract", deployer);
-  console.log("👋 Initial greeting:", await yourContract.greeting());
+  const groupRating = await hre.ethers.getContract<Contract>("GroupRating", deployer);
+  console.log(
+    "👋 Initial rating:",
+    await groupRating.createTeam([
+      "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+      "0xeA5A20D8d9Eeed3D8275993bdF3Bdb4749e7C485",
+    ]),
+  );
 };
 
-export default deployYourContract;
+export default deployGroupRating;
 
 // Tags are useful if you have multiple deploy files and only want to run one of them.
 // e.g. yarn deploy --tags YourContract
-deployYourContract.tags = ["YourContract"];
+deployGroupRating.tags = ["GroupRating"];
